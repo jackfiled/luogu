@@ -3,7 +3,7 @@
 
 using namespace std;
 
-class DFS
+class BFS
 {
 private:
     int *array;
@@ -15,7 +15,7 @@ private:
 public:
     int result = 0;
 
-    DFS(int diamond)
+    BFS(int diamond)
     {
         this->diamond = diamond;
         k1 = new bool[diamond * 2 + 1];
@@ -35,7 +35,7 @@ public:
         }
     }
 
-    ~DFS()
+    ~BFS()
     {
         delete k1;
         delete k2;
@@ -94,7 +94,7 @@ int main()
     int d;
     scanf("%d", &d);
 
-    DFS dfs(d);
+    BFS dfs(d);
 
     for (int i = 1; i <= d; i++)
     {

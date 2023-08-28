@@ -9,7 +9,7 @@ struct Ingredient {
     int sourness;
 };
 
-class DFS 
+class BFS 
 {
 public:
     int distance;
@@ -17,7 +17,7 @@ public:
     Ingredient *array;
     int length;
 
-    DFS(Ingredient *array, int length)
+    BFS(Ingredient *array, int length)
     {
         this->array = array;
         this->length = length;
@@ -52,7 +52,7 @@ int main()
         scanf("%d %d", &ingredients[i].sourness, &ingredients[i].bitterness);
     }
 
-    DFS dfs(ingredients, number);
+    BFS dfs(ingredients, number);
     dfs.dfs(0, 0, 1);
 
     printf("%d\n", dfs.distance);

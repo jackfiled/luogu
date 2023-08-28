@@ -14,7 +14,7 @@ bool isPrime(int number)
     return true;
 }
 
-class DFS {
+class BFS {
 public:
     int number;
     int target;
@@ -43,7 +43,7 @@ public:
 
 int main()
 {
-    DFS dfs;
+    BFS dfs;
     scanf("%d %d", &dfs.number, &dfs.target);
     int array[dfs.number];
     dfs.array = array;

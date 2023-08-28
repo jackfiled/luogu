@@ -5,7 +5,7 @@
 
 using namespace std;
 
-class DFS {
+class BFS {
 public:
     int number;
     int target;
@@ -37,7 +37,7 @@ private:
 
 int main()
 {
-    DFS dfs;
+    BFS dfs;
     scanf("%d %d", &dfs.number, &dfs.target);
 
     dfs.dfs(0, 1);
