@@ -3,6 +3,8 @@
         "cstdlib": "cpp",
         "cstdio": "cpp",
         "*.tcc": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "random": "cpp",
+        "limits": "cpp"
     }
 }

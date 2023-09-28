@@ -5,7 +5,7 @@
         {//这个大括号里是构建的配置文件
             "label": "build",//任务的名称
             "type" : "shell",//任务类型，process是vsc把预定义变量和转义解析后直接全部传给command；shell相当于先打开shell再输入命令，所以args还会经过shell再解析一遍
-            "command": "g++",//在shell中执行的命令，若编译C++改为g++
+            "command": "clang++",//在shell中执行的命令，若编译C++改为g++
             "args": [//一些传递给命令的参数
                 "${file}",
                 "-o",
