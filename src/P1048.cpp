@@ -1,38 +1,82 @@
+#include <vector>
 #include <cstdio>
-#include <cstring>
-#define MAX(a, b) (a) > (b) ? (a) : (b)
+#include <algorithm>
 
-int main()
+using namespace std;
+
+struct Item
 {
-    int time, number;
-    scanf("%d %d", &time, &number);
+    double time, value;
+};
 
-    int times[number + 1];
-    int values[number];
+bool compare(const Item &a, const Item &b)
+{
+    return a.value / a.time > b.value / b.time;
+}
 
-    for (int i = 1; i <= number; i++)
+struct Backward
+{
+    vector<Item> items;
+    int number, time;
+    int result = 0;
+
+    Backward()
     {
-        scanf("%d %d", &times[i], &values[i]);
+        scanf("%d %d", &time, &number);
+
+        items.resize(number + 1);
+
+        for (int i = 1; i <= number; i++)
+        {
+            scanf("%lf %lf", &items[i].time, &items[i].value);
+        }
+
+        sort(items.begin() + 1, items.end(), compare);
     }
 
-    int dp[number + 1][time + 1];
-    memset(dp, 0, sizeof(dp));
-
-    for (int i = 1; i <= number; i++)
+    double evalue(int i, double current_time)
     {
-        for (int j = time; j >= 0; j--)
+        double upperbound = 0, left = time - current_time;
+        for (int j = i; j <= number; j++)
         {
-            if (j >= times[i])
+            if (left >= items[i].time)
             {
-                dp[i][j] = MAX(dp[i - 1][j], dp[i - 1][j - times[i]] + values[i]);
+                upperbound += items[j].value;
+                left -= items[j].time;
             }
             else
             {
-                dp[i][j] = dp[i - 1][j];
+                upperbound += items[j].value / items[j].time * left;
+                return upperbound;
             }
         }
+        return upperbound;
     }
 
-    printf("%d\n", dp[number][time]);
+    void backtrace(int i, double current_value, double current_time)
+    {
+        if (i > number)
+        {
+            result = max(result, (int)current_value);
+            return;
+        }
+
+        if (current_time + items[i].time <= time)
+        {
+            backtrace(i + 1, current_value + items[i].value, current_time + items[i].time);
+        }
+        if (current_value + evalue(i + 1, current_time) > result)
+        {
+            backtrace(i + 1, current_value, current_time);
+        }
+    }
+};
+
+int main()
+{
+    Backward back;
+
+    back.backtrace(1, 0, 0);
+    printf("%d\n", back.result);
     return 0;
 }
